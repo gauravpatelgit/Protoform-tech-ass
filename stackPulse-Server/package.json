@@ -1,0 +1,78 @@
+{
+  "name": "stackpulse-api",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "imports": {
+    "#*": "./src/*"
+  },
+  "scripts": {
+    "dev": "tsx --watch --env-file .env.development src/server.ts",
+    "dev:staging": "tsx --watch --env-file .env.staging src/server.ts",
+    "dev:prod": "tsx --watch --env-file .env.production src/server.ts",
+    "start": "NODE_ENV=production tsx --env-file=.env.production src/server.ts",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest",
+    "prepare": "husky",
+    "test:run": "vitest run",
+    "db:migrate": "node --env-file=.env.development node_modules/sequelize-cli/lib/sequelize db:migrate",
+    "db:migrate:undo": "node --env-file=.env.development node_modules/sequelize-cli/lib/sequelize db:migrate:undo",
+    "db:migrate:undo:all": "node --env-file=.env.development node_modules/sequelize-cli/lib/sequelize db:migrate:undo:all",
+    "db:migrate:test": "NODE_ENV=test node --env-file=.env.development node_modules/sequelize-cli/lib/sequelize db:migrate",
+    "migration:generate": "node node_modules/sequelize-cli/lib/sequelize migration:generate --name",
+    "db:seed": "tsx --env-file=.env.development src/database/seeders/demo.ts"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint",
+      "prettier --check"
+    ],
+    "*.{json,yml,yaml,md}": [
+      "prettier --check"
+    ]
+  },
+  "dependencies": {
+    "@sequelize/core": "^7.0.0-alpha.48",
+    "@sequelize/mysql": "^7.0.0-alpha.48",
+    "argon2": "^0.45.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.7.1",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.24.6",
+    "p-limit": "^7.3.3",
+    "winston": "^3.19.0",
+    "winston-daily-rotate-file": "^5.0.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@tsconfig/node22": "^22.0.6",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^26.6.2",
+    "@types/supertest": "^7.2.1",
+    "eslint": "^10.12.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.9.9",
+    "sequelize": "^6.37.8",
+    "sequelize-cli": "^6.6.5",
+    "supertest": "^7.3.1",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0",
+    "typescript-eslint": "^8.71.2",
+    "vitest": "^5.0.4"
+  }
+}
